@@ -1,47 +1,112 @@
+
 ---
 title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+description: "Make your first requests to the TaskFlow API."
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
+# Quickstart
 
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
+This guide walks you through the basic workflow of the TaskFlow API, from creating a project to managing its tasks.
 
 ## Prerequisites
 
-Before you begin, you must have:
+Before getting started, make sure you have:
 
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
+- A valid TaskFlow API key.
+- An HTTP client, such as cURL or Postman.
 
-## Get started
+## Step 1: Create a project
 
-<Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
+Before creating tasks, you must create a project.
 
-    ```bash
-    npm install your-package
-    ```
-  </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
+**Endpoint:** `POST /projects`
 
-    ```bash
-    your-cli init
-    ```
-  </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
+```bash
+curl -X POST "https://test-writechoice.onrender.com/projects" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "My First Project",
+    "description": "A project created using the TaskFlow API"
+  }'
+```
 
-    ```bash
-    your-cli start
-    ```
-  </Step>
-</Steps>
+The API returns the created project, including its `project_id`.
 
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
+Save this ID because you will need it to create tasks.
 
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
-</Tip>
+## Step 2: Create a task
+
+Now use the `project_id` returned in the previous step.
+
+**Endpoint:** `POST /tasks`
+
+```bash
+curl -X POST "https://test-writechoice.onrender.com/tasks" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "project_id": "YOUR_PROJECT_ID",
+    "title": "Create API documentation",
+    "description": "Write the first version of the documentation"
+  }'
+```
+
+The API returns the created task, including its `task_id`.
+
+## Step 3: List project tasks
+
+To retrieve all tasks belonging to a project, use:
+
+**Endpoint:** `GET /projects/{project_id}/tasks`
+
+```bash
+curl -X GET "https://test-writechoice.onrender.com/projects/YOUR_PROJECT_ID/tasks" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+The response contains the project ID, the total number of tasks, and the tasks array.
+
+## Step 4: Update a task
+
+To update a task, use its `task_id`.
+
+**Endpoint:** `PATCH /tasks/{task_id}`
+
+```bash
+curl -X PATCH "https://test-writechoice.onrender.com/tasks/YOUR_TASK_ID" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "status": "in_progress"
+  }'
+```
+
+Available task statuses:
+
+| Status | Description |
+|---|---|
+| `pending` | Task not started |
+| `in_progress` | Task in progress |
+| `done` | Task completed |
+
+## Step 5: Delete a task
+
+To permanently delete a task, use:
+
+**Endpoint:** `DELETE /tasks/{task_id}`
+
+```bash
+curl -X DELETE "https://test-writechoice.onrender.com/tasks/YOUR_TASK_ID" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+The API returns a confirmation message when the task is deleted.
+
+**Warning:** Deleting a task is permanent and cannot be undone.
+
+## Next steps
+
+You now know the basic TaskFlow API workflow.
+
+Explore the API Reference to learn more about each endpoint, its parameters, request bodies, and possible responses.
