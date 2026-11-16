@@ -1,0 +1,76 @@
+# Update Task 
+
+Updates one or more fields of an existing task.
+
+## Endpoint 
+
+Patch '/tasks/{task_id}'
+
+## Authentication 
+
+This endepoint requires Bearer Token authentication
+
+```http
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Path Parameters
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `task_id` | string (UUID) | Yes | ID of the task to update. |
+
+## Requestbory 
+
+| Parameter | Type | Required | Descripiton |
+|---|---|---|---|
+| 'Status' | String | Yes | The new status for the task. |
+| 'Title' | String | Yes | The new title for the task. |
+| 'Descripion' | String | Yes | The new descripition for the task. |
+
+## Responses
+
+### 200-updated
+
+Task updated successfully.
+
+Example response:
+
+```json
+{
+  task_id: "f9e8d7c6-b5a4-3210-fedc-ba9876543210",
+  project_id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  title: "Write introduction page",
+  description: "Draft the overview and getting started sections.",
+  status: "in_progress",
+  created_at: "2025-05-12T10:35:00.000Z",
+  updated_at: "2025-05-12T11:00:00.000Z",
+}
+```
+
+### 400 — Bad Request
+
+The request contains invalid data or no fields to update.
+
+### 401 — Unauthorized
+
+The API key is missing or invalid.
+
+### 404 — Not Found
+
+The specified project does not exist.
+
+Example response:
+
+```json
+{
+  "error": "Not Found",
+  "message": "Project not found"
+}
+```
+## Important Notes
+
+- The `task_id` must identify an existing task.
+- At least one field must be provided.
+- Only the documented fields can be updated.
+- Valid statuses are `pending`, `in_progress`, and `done`.
