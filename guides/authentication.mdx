@@ -1,0 +1,51 @@
+
+---
+title: "Authentication"
+description: "Learn how to authenticate requests to the TaskFlow API."
+---
+
+# Authentication
+
+The TaskFlow API uses Bearer Token authentication to protect its endpoints.
+
+A valid API key must be included in the `Authorization` header of every request.
+
+## Authorization header
+
+Include your API key using the following format:
+
+```http
+Authorization: Bearer YOUR_API_KEY
+```
+
+Replace `YOUR_API_KEY` with your actual API key.
+
+## Example request
+
+The following example shows how to create a project using an authenticated request:
+
+```bash
+curl -X POST "https://test-writechoice.onrender.com/projects" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "My First Project",
+    "description": "My first TaskFlow project"
+  }'
+```
+
+## Authentication errors
+
+If authentication fails, the API returns an HTTP `401 Unauthorized` response.
+
+This can happen when:
+
+- The Authorization header is missing.
+- The API key is invalid.
+- The Bearer Token format is incorrect.
+
+## Important
+
+- Include the Authorization header in every API request.
+- Keep your API key private.
+- Never publish your real API key in documentation, source code, or public repositories.
