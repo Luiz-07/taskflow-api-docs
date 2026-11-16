@@ -1,0 +1,100 @@
+# Create Task
+
+Creates a new task inside an existing TaskFlow project.
+
+You must create a project first using the `POST /projects` endpoint. The `project_id` returned by that endpoint is required to create a task.
+
+## Endpoint
+
+<badge color="success">POST</badge> `/tasks`
+
+## Authentication
+
+This endpoint requires Bearer Token authentication.
+
+```http
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Request Body
+
+The request must contain a JSON object.
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `project_id` | string (UUID) | Yes | ID of the project where the task will be created. |
+| `title` | string | Yes | Title of the task. |
+| `description` | string | No | Description of the task. |
+
+### Example Request
+
+```json
+{
+  "project_id": "550e8400-e29b-41d4-a716-446655440000",
+  "title": "Create API documentation",
+  "description": "Write the first version of the documentation"
+}
+```
+
+### cURL Example
+
+```bash
+curl -X POST "https://test-writechoice.onrender.com/tasks" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "project_id": "550e8400-e29b-41d4-a716-446655440000",
+    "title": "Create API documentation",
+    "description": "Write the first version of the documentation"
+  }'
+```
+
+## Responses
+
+### 201 — Created
+
+The task was successfully created.
+
+Example response:
+
+```json
+{
+  "task_id": "660e8400-e29b-41d4-a716-446655440001",
+  "project_id": "550e8400-e29b-41d4-a716-446655440000",
+  "title": "Create API documentation",
+  "description": "Write the first version of the documentation",
+  "status": "pending",
+  "created_at": "2026-11-16T12:00:00Z",
+  "updated_at": "2026-11-16T12:00:00Z"
+}
+```
+
+### 400 — Bad Request
+
+The request body is missing or invalid.
+
+### 401 — Unauthorized
+
+The API key is missing or invalid.
+
+### 404 — Not Found
+
+The specified project does not exist.
+
+Example response:
+
+```json
+{
+  "error": "Not Found",
+  "message": "Project not found"
+}
+```
+
+## Important Notes
+
+- The `project_id` field is required.
+- The `title` field is required.
+- The `description` field is optional.
+- The initial task status is `pending`.
+- The project must exist before creating a task.
+- The `task_id` is generated automatically.
