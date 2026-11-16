@@ -1,20 +1,56 @@
+
 ---
 title: "Introduction"
-description: "Welcome to your project"
+description: "Learn about the TaskFlow API and its main features."
 ---
 
-Write a short description of your product here. What it does, who it's for, and what they can accomplish with it.
+# TaskFlow API
 
-<Tip>
-  Ready to make this your own? Start by editing this page. Update your `docs.json` file to customize your site. Then fill out the [Quickstart](/quickstart) page.
-</Tip>
+The TaskFlow API is a simple task management API that allows you to create projects, manage tasks, update task statuses, and delete tasks.
 
-<Card title="Quickstart" icon="rocket" href="/quickstart">
-  This card links to the quickstart page in your project.
-</Card>
-<Card title="Components" icon="puzzle-piece" href="https://mintlify.com/docs/components">
-  Add cards, callouts, steps, tabs, and more to design and structure your pages.
-</Card>
-<Card title="Settings" icon="gear" href="https://mintlify.com/docs/organize/settings">
-  Set your site name, branding, and navigation in the `docs.json` file.
-</Card>
+## What can you do?
+
+With the TaskFlow API, you can:
+
+- Create projects to organize your work.
+- Create tasks inside existing projects.
+- List all tasks belonging to a project.
+- Update task information and status.
+- Delete tasks.
+
+## How does it work?
+
+The API follows a simple workflow:
+
+1. Create a project.
+2. Save the `project_id` returned by the API.
+3. Create tasks using that `project_id`.
+4. List or update tasks as needed.
+5. Delete tasks when they are no longer needed.
+
+## Base URL
+
+All API requests are sent to:
+
+```text
+https://test-writechoice.onrender.com/
+```
+
+## Authentication
+
+The API requires a valid Bearer token to authenticate requests.
+
+You must include your API key in the `Authorization` header.
+
+For example:
+
+```http
+Authorization: Bearer YOUR_API_KEY
+```
+
+See the [Authentication](guides/authentication) guide for more details.
+
+## Next steps
+
+- Follow the [Quickstart](guides/quickstart) guide to make your first API request.
+- Explore the API Reference to learn about each endpoint.
