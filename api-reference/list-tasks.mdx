@@ -1,0 +1,95 @@
+# List Tasks
+
+Retrieves all tasks belonging to a specific project.
+
+If the project exists but has no tasks, the API returns an empty `tasks` array.
+
+## Endpoint
+
+<badge color="info">GET</badge> `/projects/{project_id}/tasks`
+
+## Authentication
+
+This endpoint requires Bearer Token authentication.
+
+```http
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Path Parameters
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `project_id` | string (UUID) | Yes | Unique identifier of the project. |
+
+## Example Request
+
+```http
+GET /projects/550e8400-e29b-41d4-a716-446655440000/tasks
+```
+
+### cURL Example
+
+```bash
+curl -X GET "https://test-writechoice.onrender.com/projects/550e8400-e29b-41d4-a716-446655440000/tasks" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Responses
+
+### 200 — OK
+
+The tasks belonging to the project were successfully retrieved.
+
+Example response:
+
+```json
+{
+  "project_id": "550e8400-e29b-41d4-a716-446655440000",
+  "total": 2,
+  "tasks": [
+    {
+      "task_id": "660e8400-e29b-41d4-a716-446655440001",
+      "project_id": "550e8400-e29b-41d4-a716-446655440000",
+      "title": "Create API documentation",
+      "description": "Write the first version of the documentation",
+      "status": "pending",
+      "created_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T12:00:00Z"
+    },
+    {
+      "task_id": "770e8400-e29b-41d4-a716-446655440002",
+      "project_id": "550e8400-e29b-41d4-a716-446655440000",
+      "title": "Review documentation",
+      "description": "Review the API reference",
+      "status": "in_progress",
+      "created_at": "2026-11-16T13:00:00Z",
+      "updated_at": "2026-11-16T13:30:00Z"
+    }
+  ]
+}
+```
+
+### 401 — Unauthorized
+
+The API key is missing or invalid.
+
+### 404 — Not Found
+
+The specified project does not exist.
+
+Example response:
+
+```json
+{
+  "error": "Not Found",
+  "message": "Project not found"
+}
+```
+
+## Important Notes
+
+- The `project_id` must identify an existing project.
+- The response includes the project ID, the total number of tasks, and the tasks array.
+- If the project has no tasks, the `tasks` array will be empty.
+- Each task includes its ID, title, description, status, and timestamps.
