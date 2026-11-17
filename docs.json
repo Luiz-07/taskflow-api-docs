@@ -16,7 +16,7 @@
         "pages": [
           "index",
           "guides/authentication",
-          "guides/quickstart"
+          "quickstart"
         ]
       },
       {
