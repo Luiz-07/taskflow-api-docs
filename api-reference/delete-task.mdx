@@ -1,0 +1,45 @@
+# Delete Task
+
+ Permanently deletes a task. This action cannot be undone.
+
+## Authentication 
+
+This endpoint requires Bearer Token authentication
+
+```http
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Path Parameters
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `task_id` | string (UUID) | Yes | Delete the ID of the selected task |
+
+## Responses
+
+### 200 - Ok
+
+ Task deleted successfully.
+
+### 401 - Unauthorized
+
+The API key is missing or invalid.
+
+### 404 - Not Found
+
+The specified task does not exist.
+
+Example response:
+
+```json
+{
+  "error": "Not Found",
+  "message": "Task not found"
+}
+```
+
+## Important Notes
+
+- Requires a valid `task_id` obtained from `POST /tasks`.
+
