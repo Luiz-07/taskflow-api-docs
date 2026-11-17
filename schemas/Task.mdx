@@ -1,0 +1,29 @@
+# Task
+
+Represents a task in the TaskFlow API.
+
+## Properties
+
+| Parameter | Type | Nullable | Description |
+|---|---|---|---|
+| `task_id` | string (UUID) | No | Unique identifier for the task. Generated automatically. |
+| `project_id` | string (UUID) | No | The ID of the project this task belongs to. |
+| `title` | string | No | The title of the task. |
+| `description` | string | Yes | An optional description of the task. |
+| `status` | string | No | The current status of the task. Allowed values: `pending`, `in_progress`, `done`. |
+| `created_at` | string (date-time) | No | Timestamp of when the task was created. |
+| `updated_at` | string (date-time) | No | Timestamp of the last update to the task. |
+
+## Example
+
+```json
+{
+ "task_id": "f9e8d7c6-b5a4-3210-fedc-ba9876543210",
+ "project_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+ "title":  "Write introduction page",
+ "description": "Draft the overview and getting started sections.",
+ "status": "pending"
+ "created_at": "2025-05-12T10:35:00.000Z",
+ "updated_at": "2025-05-12T11:00:00.000Z",
+}
+```
